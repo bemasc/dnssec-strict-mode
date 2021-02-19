@@ -80,7 +80,7 @@ The DNSSEC Strict Mode flag appears in bit $N of the DNSKEY flags field.  If thi
 
 # Operational Considerations
 
-Enabling Strict Mode, or performing key rollover with a Strict Mode key, requires the use of Double-Signature Key Rollover ({{RFC6781}} Section 4.1.1.2).  Pre-Publish Key Rollover ({{RFC6781}} Section 4.1.1.1) cannot be used.
+Enabling Strict Mode, or performing key rollover with a Strict Mode key, requires the use of Double-Signature Key Rollover ({{?RFC6781}} Section 4.1.1.2).  Pre-Publish Key Rollover ({{RFC6781}} Section 4.1.1.1) cannot be used.
 
 By making it safe to use a wider range of DNSSEC Algorithms, this specification could encourage larger RRSIG RRSets, and hence larger responses.
 
