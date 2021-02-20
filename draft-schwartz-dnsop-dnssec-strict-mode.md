@@ -94,12 +94,11 @@ A zone that adds signatures under a less secure algorithm, relying on a strong S
 
 # IANA Considerations
 
-IANA is instructed to add this allocation to the DNSKEY RR Flags registry
-+--------+-------------+-----------------+
+IANA is instructed to add this allocation to the DNSKEY RR Flags registry:
+
 | Number | Description | Reference       |
-+--------+-------------+-----------------+
+| ------ | ----------- | --------------- |
 | $N     | STRICT      | (This document) |
-+--------+-------------+-----------------+
 
 --- back
 
