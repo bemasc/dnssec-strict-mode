@@ -188,10 +188,15 @@ Table of Contents
 6.  IANA Considerations
 
    IANA is instructed to add this allocation to the DNSKEY RR Flags
-   registry +--------+-------------+-----------------+ | Number |
-   Description | Reference |
-   +--------+-------------+-----------------+ | $N | STRICT | (This
-   document) | +--------+-------------+-----------------+
+   registry:
+
+                +========+=============+=================+
+                | Number | Description | Reference       |
+                +========+=============+=================+
+                | $N     | STRICT      | (This document) |
+                +--------+-------------+-----------------+
+
+                                 Table 1
 
 7.  References
 
