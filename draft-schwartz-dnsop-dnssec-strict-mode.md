@@ -64,10 +64,12 @@ Some implementations do offer an option to enforce signature completeness, e.g. 
 From the viewpoint of any single party, each DNSSEC Algorithm (i.e. signature algorithm) can be assigned some level of perceived strength or confidence.  The party might be a zone owner, considering which algorithms to use, or a validator, consider which algorithms to implement.  Either way, the party can safely include algorithms in which they have maximal confidence (i.e. viewed as secure), and safely exclude algorithms in which they have no confidence (i.e. viewed as worthless).
 
 Under the current DNSSEC validation behavior, a zone is only as secure as the weakest algorithm implemented by both the signer and the validator.  If there is at least one algorithm that all parties agree offers maximum strength, this is fine.  Otherwise, both parties have a dilemma.  Each party is faced with two options:
+
 * Use/implement only their most preferred algorithms, at the cost of achieving no security with counterparties who distrust those algorithms.
 * Use/implement a wide range of algorithms, at the cost of weaker security for counterparties who also implement a wide range of algorithms.
 
 In practice, zone owners typically select a small number of algorithms, and validators typically support a wide range.  This arrangement often works well, but can fail for a variety of reasons:
+
 * When a new, stronger algorithm is introduced but is not yet widely implemented, zone owners must continue to sign with older, weaker algorithms, typically for many years, until nearly all validators are updated.
 * National crypto standards are often highly trusted by some parties, and viewed with suspicion by others.
 * Quantum computing has the potential to further confuse the landscape of signature algorithm confidence.  Under the present standards, parties might be required to trust a novel postquantum algorithm of uncertain strength or remain vulnerable to quantum attack.
