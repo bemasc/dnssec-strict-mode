@@ -57,13 +57,13 @@ According to {{!RFC6840}} Section 5.4, when validators (i.e. resolvers) are chec
 
 Thus, validators are required to walk through the set of RRSIGs, checking each one that they are able until they find one that matches or run out.
 
-Some implementations do offer an option to enforce signature completeness, e.g. Unbound's `harden-algo-downgrade` option ({{Unbound}}),, but most validating resolvers appear to follow the standards guidance on this point.
+Some implementations do offer an option to enforce signature completeness, e.g. Unbound's `harden-algo-downgrade` option {{Unbound}}, but most validating resolvers appear to follow the standards guidance on this point.  Validators' tolerance for invalid paths is important due to transient inconsistencies during certain kinds of zone maintenance (e.g. Pre-Publish Key Rollover, {{RFC6781}} Section 4.1.1.1).
 
 ## Algorithm trust levels
 
 From the viewpoint of any single party, each DNSSEC Algorithm (i.e. signature algorithm) can be assigned some level of perceived strength or confidence.  The party might be a zone owner, considering which algorithms to use, or a validator, consider which algorithms to implement.  Either way, the party can safely include algorithms in which they have maximal confidence (i.e. viewed as secure), and safely exclude algorithms in which they have no confidence (i.e. viewed as worthless).
 
-Under the current DNSSEC validation behavior, a zone is only as secure as the weakest algorithm implemented by both the signer and the validator.  If there is at least one algorithm that all parties agree offers maximum strength, this is fine.  Otherwise, both parties have a dilemma.  Each party is faced with two options:
+Under the current DNSSEC validation behavior, a zone is only as secure as the weakest algorithm implemented by both the signer and the validator.  If there is at least one algorithm that all parties agree offers maximum strength, this is not a problem.  Otherwise, we have a dilemma.  Each party is faced with two options:
 
 * Use/implement only their most preferred algorithms, at the cost of achieving no security with counterparties who distrust those algorithms.
 * Use/implement a wide range of algorithms, at the cost of weaker security for counterparties who also implement a wide range of algorithms.
@@ -86,7 +86,7 @@ Enabling Strict Mode, or performing key rollover with a Strict Mode key, require
 
 By making it safe to use a wider range of DNSSEC Algorithms, this specification could encourage larger RRSIG RRSets, and hence larger responses.
 
-When a zone has multiple Strict Mode keys, validators are instructed to validate them all, likely increasing CPU usage.
+When a zone has multiple Strict Mode keys, validators will check them all, likely increasing CPU usage.
 
 # Security Considerations
 
