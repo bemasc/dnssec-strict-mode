@@ -107,8 +107,11 @@ Table of Contents
 
    Some implementations do offer an option to enforce signature
    completeness, e.g.  Unbound's "harden-algo-downgrade" option
-   ([Unbound]),, but most validating resolvers appear to follow the
-   standards guidance on this point.
+   [Unbound], but most validating resolvers appear to follow the
+   standards guidance on this point.  Validators' tolerance for invalid
+   paths is important due to transient inconsistencies during certain
+   kinds of zone maintenance (e.g.  Pre-Publish Key Rollover, [RFC6781]
+   Section 4.1.1.1).
 
 2.2.  Algorithm trust levels
 
@@ -124,7 +127,7 @@ Table of Contents
    Under the current DNSSEC validation behavior, a zone is only as
    secure as the weakest algorithm implemented by both the signer and
    the validator.  If there is at least one algorithm that all parties
-   agree offers maximum strength, this is fine.  Otherwise, both parties
+   agree offers maximum strength, this is not a problem.  Otherwise, we
    have a dilemma.  Each party is faced with two options:
 
    *  Use/implement only their most preferred algorithms, at the cost of
@@ -177,8 +180,8 @@ Table of Contents
    specification could encourage larger RRSIG RRSets, and hence larger
    responses.
 
-   When a zone has multiple Strict Mode keys, validators are instructed
-   to validate them all, likely increasing CPU usage.
+   When a zone has multiple Strict Mode keys, validators will check them
+   all, likely increasing CPU usage.
 
 5.  Security Considerations
 
