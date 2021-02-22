@@ -57,7 +57,7 @@ According to {{!RFC6840}} Section 5.4, when validators (i.e. resolvers) are chec
 
 Thus, validators are required to walk through the set of RRSIGs, checking each one that they are able until they find one that matches or run out.
 
-Some implementations do offer an option to enforce signature completeness, e.g. Unbound's `harden-algo-downgrade` option {{Unbound}}, but most validating resolvers appear to follow the standards guidance on this point.  Validators' tolerance for invalid paths is important due to transient inconsistencies during certain kinds of zone maintenance (e.g. Pre-Publish Key Rollover, {{RFC6781}} Section 4.1.1.1).
+Some implementations do offer an option to enforce signature completeness, e.g. Unbound's `harden-algo-downgrade` option {{Unbound}}, but most validating resolvers appear to follow the standards guidance on this point.  Validators' tolerance for invalid paths is important due to transient inconsistencies during certain kinds of zone maintenance (e.g. Pre-Publish Key Rollover, {{?RFC6781}} Section 4.1.1.1).
 
 ## Algorithm trust levels
 
@@ -78,11 +78,11 @@ This specification resolves these dilemmas by providing zones with the security 
 
 # The DNSSEC Strict Mode flag
 
-The DNSSEC Strict Mode flag appears in bit $N of the DNSKEY flags field.  If this flag is set, all records in the zone MUST be signed by this key.  A validator that receives a Strict Mode DNSKEY with a supported Algorithm SHOULD reject as Bogus any RRSet that lacks a valid RRSIG from this DNSKEY.  If there are multiple Strict Mode keys for the zone, validators SHOULD check them all.
+The DNSSEC Strict Mode flag appears in bit $N of the DNSKEY flags field.  If this flag is set, all records in the zone MUST be signed correctly under this key's specified Algorithm.  A validator that receives a Strict Mode DNSKEY with a supported Algorithm SHOULD reject as Bogus any RRSet that lacks a valid RRSIG with this Algorithm.  If there are multiple Strict Mode keys for the zone, validators SHOULD validate signatures under each of their Algorithms.
 
 # Operational Considerations
 
-Enabling Strict Mode, or performing key rollover with a Strict Mode key, requires the use of Double-Signature Key Rollover ({{?RFC6781}} Section 4.1.1.2).  Pre-Publish Key Rollover ({{RFC6781}} Section 4.1.1.1) cannot be used.
+Once a zone is signed, enabling Strict Mode can be done using any ordinary key rollover procedure ({{RFC6781}} Section 4.1), to a new DNSKEY that contains the Strict Mode flag.  When signing a zone for the first time, or adding a new Algorithm, care must be taken to fully sign the zone before enabling Strict Mode.
 
 By making it safe to use a wider range of DNSSEC Algorithms, this specification could encourage larger RRSIG RRSets, and hence larger responses.
 
@@ -92,7 +92,7 @@ When a zone has multiple Strict Mode keys, validators will check them all, likel
 
 This specification enables the safe use of signature algorithms with intermediate or indeterminate security.  It does not protect against weak Digest Types in DS records (especially "second preimage" attacks).
 
-A zone that adds signatures under a less secure algorithm, relying on a strong Strict Mode key for security, will weaken security for validators that have not implemented support for Strict Mode.  Zone owners should use caution when relying on Strict Mode until Strict Mode is widely supported in validators.
+A zone that adds signatures under a less secure algorithm, relying on a strong Strict Mode algorithm for security, will weaken security for validators that have not implemented support for Strict Mode.  Zone owners should use caution when relying on Strict Mode until Strict Mode is widely supported in validators.
 
 # IANA Considerations
 
