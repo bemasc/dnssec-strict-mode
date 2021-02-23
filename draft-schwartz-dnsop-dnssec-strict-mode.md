@@ -67,7 +67,7 @@ Some implementations do offer an option to enforce signature completeness, e.g. 
 
 From the viewpoint of any single party, each DNSSEC Algorithm (i.e. signature algorithm) can be assigned some level of perceived strength or confidence.  The party might be a zone owner, considering which algorithms to use, or a validator, consider which algorithms to implement.  Either way, the party can safely include algorithms in which they have maximal confidence (i.e. viewed as secure), and safely exclude algorithms in which they have no confidence (i.e. viewed as worthless).
 
-Under the current DNSSEC validation behavior, a zone is only as secure as the weakest algorithm implemented by both the signer and the validator.  If there is at least one algorithm that all parties agree offers maximum strength, this is not a problem.  Otherwise, we have a dilemma.  Each party is faced with two options:
+Under the current DNSSEC validation behavior, a zone is only as secure as the weakest algorithm used to sign the zone.  If there is at least one algorithm that all parties agree offers maximum strength, this is not a problem.  Otherwise, we have a dilemma.  Each party is faced with two options:
 
 * Use/implement only their most preferred algorithms, at the cost of achieving no security with counterparties who distrust those algorithms.
 * Use/implement a wide range of algorithms, at the cost of weaker security for counterparties who also implement a wide range of algorithms.
