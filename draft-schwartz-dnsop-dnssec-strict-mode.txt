@@ -130,10 +130,10 @@ Table of Contents
    viewed as worthless).
 
    Under the current DNSSEC validation behavior, a zone is only as
-   secure as the weakest algorithm implemented by both the signer and
-   the validator.  If there is at least one algorithm that all parties
-   agree offers maximum strength, this is not a problem.  Otherwise, we
-   have a dilemma.  Each party is faced with two options:
+   secure as the weakest algorithm used to sign the zone.  If there is
+   at least one algorithm that all parties agree offers maximum
+   strength, this is not a problem.  Otherwise, we have a dilemma.  Each
+   party is faced with two options:
 
    *  Use/implement only their most preferred algorithms, at the cost of
       achieving no security with counterparties who distrust those
