@@ -4,8 +4,8 @@
 
 dnsop                                                        B. Schwartz
 Internet-Draft                                                Google LLC
-Intended status: Standards Track                        22 February 2021
-Expires: 26 August 2021
+Intended status: Standards Track                        23 February 2021
+Expires: 27 August 2021
 
 
                            DNSSEC Strict Mode
@@ -43,7 +43,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 26 August 2021.
+   This Internet-Draft will expire on 27 August 2021.
 
 Copyright Notice
 
@@ -87,8 +87,13 @@ Table of Contents
 
 2.1.  DNSSEC validation behavior
 
-   According to [RFC6840] Section 5.4, when validators (i.e. resolvers)
-   are checking DNSSEC signatures:
+   When a DNS zone is signed, [RFC4035] Section 2.2 says:
+
+      There MUST be an RRSIG for each RRset using at least one DNSKEY of
+      each algorithm in the zone apex DNSKEY RRset.
+
+   However, according to [RFC6840] Section 5.4, when validators (i.e.
+   resolvers) are checking DNSSEC signatures:
 
       a resolver SHOULD accept any valid RRSIG as sufficient, and only
       determine that an RRset is Bogus if all RRSIGs fail validation.
@@ -163,14 +168,18 @@ Table of Contents
 3.  The DNSSEC Strict Mode flag
 
    The DNSSEC Strict Mode flag appears in bit $N of the DNSKEY flags
-   field.  If this flag is set, all records in the zone MUST be signed
-   correctly under this key's specified Algorithm.  A validator that
-   receives a Strict Mode DNSKEY with a supported Algorithm SHOULD
-   reject as Bogus any RRSet that lacks a valid RRSIG with this
-   Algorithm.  If there are multiple Strict Mode keys for the zone,
-   validators SHOULD validate signatures under each of their Algorithms.
+   field.  A validator that receives a Strict Mode DNSKEY with a
+   supported Algorithm SHOULD reject as Bogus any RRSet that lacks a
+   valid RRSIG with this Algorithm.  If there are multiple Strict Mode
+   keys for the zone, validators SHOULD validate signatures under each
+   of their Algorithms.
 
 4.  Operational Considerations
+
+   Strict Mode only advises validators to enforce a requirement that
+   already applies to zone operators, so zones that comply with
+   [RFC4035] Section 2.2 do not need to take any further action before
+   enabling Strict Mode.
 
    Once a zone is signed, enabling Strict Mode can be done using any
    ordinary key rollover procedure ([RFC6781] Section 4.1), to a new
@@ -219,6 +228,11 @@ Table of Contents
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
               <https://datatracker.ietf.org/doc/html/rfc2119>.
+
+   [RFC4035]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
+              Rose, "Protocol Modifications for the DNS Security
+              Extensions", RFC 4035, DOI 10.17487/RFC4035, March 2005,
+              <https://datatracker.ietf.org/doc/html/rfc4035>.
 
    [RFC6840]  Weiler, S., Ed. and D. Blacka, Ed., "Clarifications and
               Implementation Notes for DNS Security (DNSSEC)", RFC 6840,
