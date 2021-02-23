@@ -47,7 +47,11 @@ when, and only when, they appear in all capitals, as shown here.
 
 ## DNSSEC validation behavior
 
-According to {{!RFC6840}} Section 5.4, when validators (i.e. resolvers) are checking DNSSEC signatures:
+When a DNS zone is signed, {{!RFC4035}} Section 2.2 says:
+
+> There MUST be an RRSIG for each RRset using at least one DNSKEY of each algorithm in the zone apex DNSKEY RRset.
+
+However, according to {{!RFC6840}} Section 5.4, when validators (i.e. resolvers) are checking DNSSEC signatures:
 
 > a resolver SHOULD accept any valid RRSIG as sufficient, and only determine that an RRset is Bogus if all RRSIGs fail validation.
 
@@ -78,9 +82,11 @@ This specification resolves these dilemmas by providing zones with the security 
 
 # The DNSSEC Strict Mode flag
 
-The DNSSEC Strict Mode flag appears in bit $N of the DNSKEY flags field.  If this flag is set, all records in the zone MUST be signed correctly under this key's specified Algorithm.  A validator that receives a Strict Mode DNSKEY with a supported Algorithm SHOULD reject as Bogus any RRSet that lacks a valid RRSIG with this Algorithm.  If there are multiple Strict Mode keys for the zone, validators SHOULD validate signatures under each of their Algorithms.
+The DNSSEC Strict Mode flag appears in bit $N of the DNSKEY flags field.  A validator that receives a Strict Mode DNSKEY with a supported Algorithm SHOULD reject as Bogus any RRSet that lacks a valid RRSIG with this Algorithm.  If there are multiple Strict Mode keys for the zone, validators SHOULD validate signatures under each of their Algorithms.
 
 # Operational Considerations
+
+Strict Mode only advises validators to enforce a requirement that already applies to zone operators, so zones that comply with {{RFC4035}} Section 2.2 do not need to take any further action before enabling Strict Mode.
 
 Once a zone is signed, enabling Strict Mode can be done using any ordinary key rollover procedure ({{RFC6781}} Section 4.1), to a new DNSKEY that contains the Strict Mode flag.  When signing a zone for the first time, or adding a new Algorithm, care must be taken to fully sign the zone before enabling Strict Mode.
 
