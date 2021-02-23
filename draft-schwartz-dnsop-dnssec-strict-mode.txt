@@ -207,6 +207,11 @@ Table of Contents
    owners should use caution when relying on Strict Mode until Strict
    Mode is widely supported in validators.
 
+   Although this specification considers only the security of a single
+   zone, an attacker can also choose to attack its parent zones instead.
+   Strict Mode may provide limited benefit unless it is used throughout
+   the validation chain.
+
 6.  IANA Considerations
 
    IANA is instructed to add this allocation to the DNSKEY RR Flags
