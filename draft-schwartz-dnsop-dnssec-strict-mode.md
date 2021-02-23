@@ -100,6 +100,8 @@ This specification enables the safe use of signature algorithms with intermediat
 
 A zone that adds signatures under a less secure algorithm, relying on a strong Strict Mode algorithm for security, will weaken security for validators that have not implemented support for Strict Mode.  Zone owners should use caution when relying on Strict Mode until Strict Mode is widely supported in validators.
 
+Although this specification considers only the security of a single zone, an attacker can also choose to attack its parent zones instead.  Strict Mode may provide limited benefit unless it is used throughout the validation chain.
+
 # IANA Considerations
 
 IANA is instructed to add this allocation to the DNSKEY RR Flags registry:
