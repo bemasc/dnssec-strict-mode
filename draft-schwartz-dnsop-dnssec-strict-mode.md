@@ -82,7 +82,9 @@ This specification resolves these dilemmas by providing zones with the security 
 
 # The DNSSEC Strict Mode flag
 
-The DNSSEC Strict Mode flag appears in bit $N of the DNSKEY flags field.  A validator that receives a Strict Mode DNSKEY with a supported Algorithm SHOULD reject as Bogus any RRSet that lacks a valid RRSIG with this Algorithm.  If there are multiple Strict Mode keys for the zone, validators SHOULD validate signatures under each of their Algorithms.
+The DNSSEC Strict Mode flag appears in bit $N of the DNSKEY flags field.  A validator that receives a Strict Mode DNSKEY with a supported Algorithm SHOULD reject as Bogus any RRSet that lacks a valid RRSIG with this Algorithm.
+
+If the zone has Strict Mode keys for multiple Algorithms, validators SHOULD validate signatures under each of their Algorithms and mark the RRSet as Bogus if there is no such RRSIG or validation produces a Bogus result.  One Strict Mode DNSKEY is sufficient to trigger this behavior for its Algorithm, even if other non-Strict DNSKEYs are present for that Algorithm.
 
 # Operational Considerations
 
