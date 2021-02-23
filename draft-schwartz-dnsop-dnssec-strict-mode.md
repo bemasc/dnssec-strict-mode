@@ -92,6 +92,8 @@ Strict Mode only advises validators to enforce a requirement that already applie
 
 Once a zone is signed, enabling Strict Mode can be done using any ordinary key rollover procedure ({{RFC6781}} Section 4.1), to a new DNSKEY that contains the Strict Mode flag.  When signing a zone for the first time, or adding a new Algorithm, care must be taken to fully sign the zone before enabling Strict Mode.
 
+When removing an Algorithm, a zone operator must use key rollover to remove all Strict Mode keys for that Algorithm and wait for one TTL before removing its RRSIGs (i.e. the "conservative approach" from {{RFC6781}} Section 4.1.4).
+
 By making it safe to use a wider range of DNSSEC Algorithms, this specification could encourage larger RRSIG RRSets, and hence larger responses.
 
 When a zone has multiple Strict Mode keys, validators will check them all, likely increasing CPU usage.
