@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-02-23T00:14:04.132378+00:00",
+  "timestamp": "2021-02-25T00:13:57.483145+00:00",
   "repo": "bemasc/dnssec-strict-mode",
   "labels": [
     {
@@ -49,6 +49,95 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "MDU6SXNzdWU4MTQ2MTM4OTE=",
+      "title": "DNSKEY RRset with disparate values for this bit",
+      "url": "https://github.com/bemasc/dnssec-strict-mode/issues/1",
+      "state": "CLOSED",
+      "author": "samuelweiler",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Please deal with the edge case of a DNSKEY RRset where (at least) one DNSKEY of algorithm X has the bit set and (at least) one does not.",
+      "createdAt": "2021-02-23T16:16:39Z",
+      "updatedAt": "2021-02-23T17:07:18Z",
+      "closedAt": "2021-02-23T17:07:18Z",
+      "comments": []
+    },
+    {
+      "number": 2,
+      "id": "MDU6SXNzdWU4MTQ2MTQyMzE=",
+      "title": "remove redundant instruction",
+      "url": "https://github.com/bemasc/dnssec-strict-mode/issues/2",
+      "state": "CLOSED",
+      "author": "samuelweiler",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "\"If this flag is set, all records in the zone MUST be signed correctly under this key's specified Algorithm.\" is redundant - that's the same as the current rules.\r\n",
+      "createdAt": "2021-02-23T16:17:04Z",
+      "updatedAt": "2021-02-23T16:53:34Z",
+      "closedAt": "2021-02-23T16:53:34Z",
+      "comments": [
+        {
+          "author": "bemasc",
+          "authorAssociation": "OWNER",
+          "body": "Removed in https://github.com/bemasc/dnssec-strict-mode/commit/1d2a88aabdbf1c137baafa5465adbab263eee344",
+          "createdAt": "2021-02-23T16:53:34Z",
+          "updatedAt": "2021-02-23T16:53:34Z"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "MDU6SXNzdWU4MTQ2MTU1MzU=",
+      "title": "write about zone signing, not what signer implements",
+      "url": "https://github.com/bemasc/dnssec-strict-mode/issues/3",
+      "state": "CLOSED",
+      "author": "samuelweiler",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "Section 2.2:\r\n\r\n>   Under the current DNSSEC validation behavior, a zone is only as secure as the weakest algorithm implemented by both the signer and the validator.  \r\n\r\nWhen talking about signed zones, I prefer talking about how the zone is signed, not what the signer supports.  so \"algorithm used to sign the zone\".\r\n",
+      "createdAt": "2021-02-23T16:18:35Z",
+      "updatedAt": "2021-02-23T16:57:19Z",
+      "closedAt": "2021-02-23T16:57:19Z",
+      "comments": []
+    },
+    {
+      "number": 4,
+      "id": "MDU6SXNzdWU4MTQ2MjAzNTI=",
+      "title": "clarify the multiple strict alg instruction",
+      "url": "https://github.com/bemasc/dnssec-strict-mode/issues/4",
+      "state": "CLOSED",
+      "author": "samuelweiler",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": ">  If there are multiple Strict Mode keys for the zone, validators SHOULD validate signatures under each of their Algorithms.\r\n\r\nFirst, I assume you mean \"Strict Mode keys for multiple algorithms\".\r\n\r\nI think you should go on to say \"...and mark the RRset as Bogus if ANY of those validations result in a Bogus result\".\r\n\r\n(And, as I said on the dnsop list, I don't think we need to make this change.  But if we are...)",
+      "createdAt": "2021-02-23T16:24:10Z",
+      "updatedAt": "2021-02-23T17:07:36Z",
+      "closedAt": "2021-02-23T17:07:36Z",
+      "comments": []
+    },
+    {
+      "number": 5,
+      "id": "MDU6SXNzdWU4MTQ2Mjc3MTQ=",
+      "title": "add roll-out operational considerations",
+      "url": "https://github.com/bemasc/dnssec-strict-mode/issues/5",
+      "state": "CLOSED",
+      "author": "samuelweiler",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "document in the op considerations section: As with roll-in, when moving away from a strict mode alg, a zone operator must first roll to (all) non-strict-mode keys of that algorithm, then roll the alg out.  ",
+      "createdAt": "2021-02-23T16:32:43Z",
+      "updatedAt": "2021-02-23T17:15:56Z",
+      "closedAt": "2021-02-23T17:15:56Z",
+      "comments": []
+    }
+  ],
   "pulls": []
 }
